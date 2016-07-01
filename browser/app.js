@@ -1,9 +1,8 @@
+var socket = io(window.location.pathname);
+
 whiteboard.on('draw', function(last, current, color){
   socket.emit('drawing', {last: last, current: current, color: color})
 });
-
-
-var socket = io(window.location.pathname);
 
 socket.on('connect', function () {
     console.log('I have made a persistent two-way connection to the server!');
