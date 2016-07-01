@@ -3,11 +3,18 @@ whiteboard.on('draw', function(last, current, color){
 });
 
 
-var socket = io(window.location.origin);
+var socket = io(window.location.pathname);
 
 socket.on('connect', function () {
     console.log('I have made a persistent two-way connection to the server!');
+
 });
+
+socket.on('newconnection', function(currentDrawing){
+  currentDrawing.forEach(function(coordinate){
+    whiteboard.draw(coordinate.last, coordinate.current, coordinate.color);
+  })
+})
 
 socket.on('disconnection', function(){
   console.log('someone disconnected');
