@@ -1,7 +1,7 @@
-/*whiteboard.on('draw', function(){
-  console.log('drawing');
+whiteboard.on('draw', function(last, current, color){
+  socket.emit('drawing', {last: last, current: current, color: color})
 });
-*/
+
 
 var socket = io(window.location.origin);
 
@@ -14,3 +14,7 @@ socket.on('disconnection', function(){
   //console.log(message);
 });
 
+socket.on('sending coordinates', function(data){
+  console.log(data)
+  whiteboard.draw(data.last, data.current, data.color);
+});

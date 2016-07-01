@@ -19,6 +19,9 @@ io.on('connection', function(socket){
     //console.log('disconnected');
     io.emit('disconnection');
   });
+  socket.on('drawing', function(coordinates){
+    socket.broadcast.emit('sending coordinates', coordinates)
+  })
 
 });
 
