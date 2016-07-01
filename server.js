@@ -14,7 +14,14 @@ var io = socketio(server);
 io.on('connection', function(socket){
   console.log('a new client has connected');
   console.log(socket.id);
+
+  socket.on('disconnect', function(){
+    //console.log('disconnected');
+    io.emit('disconnection');
+  });
+
 });
+
 
 server.listen(1337, function () {
     console.log('The server is listening on port 1337!');
